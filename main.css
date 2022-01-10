@@ -1,0 +1,14 @@
+#fruit{
+    list-style: none;
+}
+
+
+.btn{
+   display: grid;
+   justify-content: space-between;
+}
+.input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
