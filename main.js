@@ -18,8 +18,11 @@ function readFruit(fruit){
    document.querySelector("#fruit").innerHTML +=`
     <li>
     ${fruit} 
-    <button onclick="updateFruit(${position})">UPDATE</button>
-    <button onclick="deleteFruit(${position})">DELETE</button>
+    <div class="content">
+    <button  class="btn btn-outline-success" onclick="updateFruit(${position})">UPDATE</button>
+    <button  class="btn btn-outline-danger" onclick="deleteFruit(${position})">DELETE</button>
+    </div>
+   
     
     </li>
    `;
@@ -31,11 +34,11 @@ readFruit(fruit);
 function createFruit(){
     let newfruit = document.querySelector("#add").value;
     try{
-        if(newfruit =="") throw "wrong"
+        if(newfruit =="") throw "enter a fruit name "
         fruit.forEach(individual =>{
             if(individual == newfruit)throw "already here"
         })
-        console.log(fruits);
+        console.log(fruit);
 
 
         fruit.push(newfruit);
