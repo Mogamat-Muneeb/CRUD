@@ -2,13 +2,22 @@
     list-style: none;
 }
 
-
-.btn{
-   display: grid;
-   justify-content: space-between;
-}
-.input{
+.content{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.input-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#fruit{
+    display: grid;
+    justify-content: center;
+  
+}
+

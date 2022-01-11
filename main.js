@@ -1,14 +1,45 @@
 let fruit = [
-    "Berries",
-    "Apple",
-    "Watermelon",
-    "Orange",
-    "Guava",
-    "Banana",
-    "Coconut",
-    "Mango",
-    "Lemon",
-    "Cherry ",
+    {
+        name: "Berries",
+        taste:"sour"
+    },
+    {
+        name: "Apple",
+        taste:"sweet"
+    },
+    {
+        name: "Cherry ",
+        taste:"sweet"
+    },
+    {
+        name: "Lemon", 
+        taste:"sour"
+    },
+    {
+        name: "Mango",
+        taste:"sweet"
+    },
+    {
+        name:  "Coconut",
+        taste:"bitter"
+    },
+    {
+        name: "Banana",
+        taste:"sweet"
+    },
+    {
+        name: "Guava",
+        taste:"bitter"
+    },
+    {
+        name: "Orange",
+        taste:"sour"
+    },
+    {
+        name: "Watermelon",
+        taste:"sweet"
+    },
+     
 ];
 
 function readFruit(fruit){
@@ -17,14 +48,39 @@ function readFruit(fruit){
    fruit.forEach((fruit,position) => {
    document.querySelector("#fruit").innerHTML +=`
     <li>
-    ${fruit} 
+    ${fruit.name} taste ${fruit.taste}
     <div class="content">
-    <button  class="btn btn-outline-success" onclick="updateFruit(${position})">UPDATE</button>
+    <div  class="buttons">
+    <button  class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#update-modal-${position}">UPDATE</button>
     <button  class="btn btn-outline-danger" onclick="deleteFruit(${position})">DELETE</button>
+    </div>
     </div>
    
     
     </li>
+
+    <div class="modal fade" id="update-modal-${position}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="update-input-${position}" value="${fruit.name} "/>
+        <select name="taste" id="update-input-taste-${position}">
+       <option value="sour">sour</option>
+       <option value="sweet">sweet</option>
+       <option value="bitter">bitter</option>
+   </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-modal-${position}" onclick="updateFruit(${position})">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
    `;
    });
 }
@@ -33,15 +89,20 @@ readFruit(fruit);
 
 function createFruit(){
     let newfruit = document.querySelector("#add").value;
+    let taste = document.querySelector("#taste").value;
+   
     try{
-        if(newfruit =="") throw "enter a fruit name "
+        if(newfruit =="") throw "Please enter a fruit name..."
         fruit.forEach(individual =>{
-            if(individual == newfruit)throw "already here"
+            if(individual == newfruit)throw "That fruit name already exists..."
         })
         console.log(fruit);
 
-
-        fruit.push(newfruit);
+        fruit.push({
+            name:newfruit,
+            taste,
+        });
+       
         readFruit(fruit);
     } catch(err){
         alert(err)
@@ -55,8 +116,21 @@ function deleteFruit(position){
 }
 
 function updateFruit(position){
-    let fruits = prompt("proper fruit name fool");
-    console.log(fruits);
-    fruit[position]= fruits;
-    readFruit(fruit);
-}
+    let fruits =document.querySelector(`#update-input-${position}`).value;
+    let taste =document.querySelector(`#update-input-taste-${position}`).value;
+    
+    try{
+        if(fruits ===""){
+            throw new Error("please enter a fruit name")
+        }
+        fruit[position]={
+            name:fruits,
+            taste,
+        };
+        readFruit(fruit);
+    }catch(error){
+        alert(error)
+    }
+    }
+  
+   
