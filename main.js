@@ -1,46 +1,7 @@
-let fruit = [
-    {
-        name: "Berries",
-        taste:"sour"
-    },
-    {
-        name: "Apple",
-        taste:"sweet"
-    },
-    {
-        name: "Cherry ",
-        taste:"sweet"
-    },
-    {
-        name: "Lemon", 
-        taste:"sour"
-    },
-    {
-        name: "Mango",
-        taste:"sweet"
-    },
-    {
-        name:  "Coconut",
-        taste:"bitter"
-    },
-    {
-        name: "Banana",
-        taste:"sweet"
-    },
-    {
-        name: "Guava",
-        taste:"bitter"
-    },
-    {
-        name: "Orange",
-        taste:"sour"
-    },
-    {
-        name: "Watermelon",
-        taste:"sweet"
-    },
-     
-];
+let fruit = JSON.parse(localStorage.getItem("fruit"))
+? JSON.parse(localStorage.getItem("fruit"))
+:[];
+  
 
 function readFruit(fruit){
    document.querySelector("#fruit").innerHTML = "";
@@ -51,8 +12,8 @@ function readFruit(fruit){
     ${fruit.name} taste ${fruit.taste}
     <div class="content">
     <div  class="buttons">
-    <button  class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#update-modal-${position}">UPDATE</button>
-    <button  class="btn btn-outline-danger" onclick="deleteFruit(${position})">DELETE</button>
+    <button  class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#update-modal-${position}">UPDATE</button>
+    <button  class="btn btn-danger" onclick="deleteFruit(${position})">DELETE</button>
     </div>
     </div>
    
@@ -75,8 +36,8 @@ function readFruit(fruit){
    </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-modal-${position}" onclick="updateFruit(${position})">Save changes</button>
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#update-modal-${position}" onclick="updateFruit(${position})">Save changes</button>
       </div>
     </div>
   </div>
@@ -102,7 +63,7 @@ function createFruit(){
             name:newfruit,
             taste,
         });
-       
+       localStorage.setItem("fruit",JSON.stringify (fruit));
         readFruit(fruit);
     } catch(err){
         alert(err)
@@ -112,6 +73,7 @@ function createFruit(){
 
 function deleteFruit(position){
     fruit.splice(position, 1)
+    localStorage.setItem("fruit",JSON.stringify (fruit));
     readFruit(fruit);
 }
 
@@ -127,6 +89,7 @@ function updateFruit(position){
             name:fruits,
             taste,
         };
+        localStorage.setItem("fruit",JSON.stringify (fruit));
         readFruit(fruit);
     }catch(error){
         alert(error)
